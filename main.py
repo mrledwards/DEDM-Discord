@@ -19,7 +19,7 @@ async def on_ready():
 @bot.command(name='?', aliases=['info'])
 async def _bot(ctx):
   embed = discord.Embed(title="Help Commands", description="The following commands are available")
-  embed.set_author(name="DEDM Bot Help")
+  embed.set_author(name="DEDM Bot Help", icon_url="https://i.imgur.com/8C2kiJ9.png")
   embed.add_field(name="!epic have x", value="add/update how many epic BP's you have (x)", inline="False")
   embed.add_field(name="!epic list all", value="lists members and how many BP's they in in a DM to you", inline="False")
   embed.add_field(name="!epic obtained all", value="use this when you have all the BP's to be taken off the list", inline="False")
