@@ -39,8 +39,8 @@ async def _bot(ctx):
 @bot.event
 async def on_member_join(member):
   print("member has joined")
-  await member.create_dm() #Create a DM chat with the new user
-  await member.dm_channel.send("Welcome to DEDM Discord server. I am the freindly helper. \n if you are here to report an ROE violation, please reply with \"roe\" and you will have access to the appropriate channel")
+#  await member.create_dm() #Create a DM chat with the new user
+  await member.send("Welcome to DEDM Discord server. I am the freindly helper. \n if you are here to report an ROE violation, please reply with \"roe\" and you will have access to the appropriate channel")
   print("dm sent")
   response = await bot.wait_for('message', check=message_check(channel=ctx.author.dm_channel))
   if response.lower() == "roe":
