@@ -60,7 +60,7 @@ async def _bot(ctx):
 @bot.command(name="epic")
 async def _bot(ctx, arg1, arg2):
 	await ctx.message.delete()
-	memberName = ctx.author.name
+	memberName = ctx.author.display_name
 	if arg1 == "have":
 		keys = db.keys()
 		if memberName in keys and arg2 != "":
