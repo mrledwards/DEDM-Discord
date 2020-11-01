@@ -18,8 +18,17 @@ async def on_ready():
 
 @bot.command(name='?', aliases=['info'])
 async def _bot(ctx):
+  embed = discord.Embed(title="Help Commands", description="The following commands are available")
+  embed.set_author(name="DEDM Bot")
+  embed.add_field(name="!epic have x", value="add/update how many epic BP's you have (x)", inline="False")
+  embed.add_field(name="!epic list all", value="lists members and how many BP's they in in a DM to you", inline="False")
+  embed.add_field(name="!epic obtained all", value="use this when you have all the BP's to be taken off the list", inline="False")
+  embed.add_field(name="!roe", value="sends a DM with current ROE", inline="False")
+  embed.add_field(name="!?", value="This help message", inline="False")
+  embed.set_footer(text="if you have any questions, or need help, please feel free to contact Wakdem")
   await ctx.message.delete()
-  await ctx.author.send("DEDM Discord Bot help \n *commands* \n !roe sends a PM with current roe \n !greeting !hi !hello sends you a greeting \n \n !epic have  x where x is how many BP you have for your first epic ship. *please update this when you get more \n !epic obtained all, when you have enough BP for an epic ship, please use this to remove yourself from the list \n !epic list all, this will DM you a list of people who have epic BP, and how many they have")
+  await ctx.author.send(embed=embed)
+#  await ctx.author.send("DEDM Discord Bot help \n *commands* \n !roe sends a PM with current roe \n !greeting !hi !hello sends you a greeting \n \n !epic have  x where x is how many BP you have for your first epic ship. *please update this when you get more \n !epic obtained all, when you have enough BP for an epic ship, please use this to remove yourself from the list \n !epic list all, this will DM you a list of people who have epic BP, and how many they have")
 
 @bot.command(name='roe', aliases=['ROE']) #sends user a DM with current roe
 async def _bot(ctx):
