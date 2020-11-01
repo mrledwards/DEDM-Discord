@@ -62,7 +62,7 @@ async def _bot(ctx):
     await ctx.message.delete()
     await ctx.send(text_to_send)
 
-@bot.command(name="authour", aliases=['who', 'version'])
+@bot.command(name="author", aliases=['who', 'version'])
 async def _bot(ctx):
   await ctx.send("DEDM Discord Bot, Written by Wakdem for the DEDM alliance of STFC Server 193")
 
