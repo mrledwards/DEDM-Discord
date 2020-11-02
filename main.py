@@ -93,7 +93,7 @@ async def _bot(ctx, arg1, arg2):
 			member.send("something went wrong, please try again")
 	elif arg1 == "obtained":
 
-		await ctx.author.send("Congratulations!!!!! May you fight with honour. \n Your information is now removed from the list")
+		await ctx.author.send("Congratulations!!!!! May you fight with honour. \n Your information is now removed from the list \n https://i.imgur.com/C3Oiobz.gif")
 		del db[memberName]
 	elif arg1 == "list":
 		keys = db.keys()
