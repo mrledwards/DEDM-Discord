@@ -111,7 +111,7 @@ async def _bot(ctx, arg1, arg2):
 #@commands.has_role("Leadership")
 async def _bot(ctx, arg1):
   await ctx.message.delete()
-  role = discord.utils.get(ctx.guild.roles, id=772697868225740820) #change id to the target id for the server (539467965276356620)
+  role = discord.utils.get(ctx.guild.roles, id=539467965276356620) #change id to the target id for the server (539467965276356620) (772697868225740820) is testing only
 
   if role in ctx.author.roles:
   #if member.has_role("Leadership"):
