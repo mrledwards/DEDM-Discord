@@ -144,3 +144,5 @@ keep_alive()
 
 token = os.environ.get("TOKEN")
 bot.run(token)
+
+#to do, see if can add what ship people are going for in the epic section. maybe acc too.
