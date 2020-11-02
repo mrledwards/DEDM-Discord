@@ -102,15 +102,26 @@ async def _bot(ctx, arg1, arg2):
 #@commands.has_role("Leadership")
 async def _bot(ctx, arg1):
   await ctx.message.delete()
-  role = discord.utils.get(ctx.guild.roles, id=772697868225740820)
+  role = discord.utils.get(ctx.guild.roles, id=772697868225740820) #change id to the target id for the server
 
   if role in ctx.author.roles:
   #if member.has_role("Leadership"):
+    m = ctx.message.content
     if arg1 == "delete":
-      m = ctx.message.content
+    #  m = ctx.message.content
       to_delete = m.replace("!admin ", "").replace("delete ", "")
       await ctx.author.send(to_delete + " will be removed")
       del db[to_delete]
+    elif arg1 == "update":
+      to_update = m.replace("!admin ", "").replace("update ", "")
+      m = to_update.rsplit(" ")
+      #s = m.rsplit(" ")
+      x = m[-1]
+      m.remove(x)
+      u = " ".join(m)
+      db[u] = x
+      await ctx.author.send("member " + u + " updated with " + x + " BP total")
+
     else:
       await ctx.author.send("something went wrong")
   else:
