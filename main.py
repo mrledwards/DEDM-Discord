@@ -4,9 +4,10 @@ import os
 from keep_alive import keep_alive
 from replit import db
 
+intents = discord.Intents.default()
+intents.members = True
 
-
-bot = commands.Bot(command_prefix='!', description="DEDM Discord bot")
+bot = commands.Bot(command_prefix='!', description="DEDM Discord bot", intents=intents)
 
 @bot.event
 async def on_ready():
@@ -42,13 +43,13 @@ async def on_member_join(member):
 #  await member.create_dm() #Create a DM chat with the new user
   await member.send("Welcome to DEDM Discord server. I am the freindly helper. \n if you are here to report an ROE violation, please reply with \"roe\" and you will have access to the appropriate channel")
   print("dm sent")
-  response = await bot.wait_for('message', check=message_check(channel=ctx.author.dm_channel))
-  if response.lower() == "roe":
+  response = await bot.wait_for('message', timeout=30.0)
+  if response == "roe" or "ROE":
     await member.send('you will be assigned the role for roe complaints')
-    u = ctx.message.author
+    u = member.name
     r = discord.utils.get(member.guild.roles, name="EXTERNAL-roe-violations")
-    await bot.add_roles(u, r)
-    await ctx.send("role has been updated")
+    await member.add_roles(r)
+    await member.send("role has been updated")
     print("roe selected")
   else:
     await member.send("no role will currently be set, please wait for an admin to assign a role")
@@ -97,8 +98,24 @@ async def _bot(ctx, arg1, arg2):
 		await ctx.author.send("Something went wrong, please try again") 
 
 
-intents = discord.Intents.default()
-intents.members = True
+@bot.command(name="admin")
+#@commands.has_role("Leadership")
+async def _bot(ctx, arg1):
+  await ctx.message.delete()
+  role = discord.utils.get(ctx.guild.roles, id=772697868225740820)
+
+  if role in ctx.author.roles:
+  #if member.has_role("Leadership"):
+    if arg1 == "delete":
+      m = ctx.message.content
+      to_delete = m.replace("!admin ", "").replace("delete ", "")
+      await ctx.author.send(to_delete + " will be removed")
+      del db[to_delete]
+    else:
+      await ctx.author.send("something went wrong")
+  else:
+    await ctx.author.send("you don't have permission to do that")
+
 
 #del db["wakdem#4244"]
 
