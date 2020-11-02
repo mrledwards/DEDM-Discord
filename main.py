@@ -35,7 +35,7 @@ async def _bot(ctx):
 async def _bot(ctx):
   await ctx.message.delete()
   embed=discord.Embed(title="Event Information Link", url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_KZ7U4STiA18gvAFs0jCwpIKobcUGGcteoLo4hDcE3Pkn9W2bqix6m2IeQ818EY_qgGlqk4Bisnly/pubhtml", description="List to event spreadsheet")
-  embed.set_author(name="DEDM Bot",, icon_url="https://i.imgur.com/XCL9PUZ.jpg")
+  embed.set_author(name="DEDM Bot", icon_url="https://i.imgur.com/XCL9PUZ.jpg")
   embed.add_field(name="Link:", value="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_KZ7U4STiA18gvAFs0jCwpIKobcUGGcteoLo4hDcE3Pkn9W2bqix6m2IeQ818EY_qgGlqk4Bisnly/pubhtml", inline=False)
   await ctx.send(embed=embed)
 
