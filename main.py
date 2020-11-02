@@ -26,10 +26,19 @@ async def _bot(ctx):
   embed.add_field(name="!epic obtained all", value="use this when you have all the BP's to be taken off the list", inline="False")
   embed.add_field(name="!roe", value="sends a DM with current ROE", inline="False")
   embed.add_field(name="!?", value="This help message", inline="False")
+  embed.add_field(name="!event", value="sends a link to the event xls to you via DM")
   embed.set_footer(text="if you have any questions, or need help, please feel free to contact Wakdem")
   await ctx.message.delete()
   await ctx.author.send(embed=embed)
-#  await ctx.author.send("DEDM Discord Bot help \n *commands* \n !roe sends a PM with current roe \n !greeting !hi !hello sends you a greeting \n \n !epic have  x where x is how many BP you have for your first epic ship. *please update this when you get more \n !epic obtained all, when you have enough BP for an epic ship, please use this to remove yourself from the list \n !epic list all, this will DM you a list of people who have epic BP, and how many they have")
+
+@bot.command(name="event")
+async def _bot(ctx):
+  await ctx.message.delete()
+  embed=discord.Embed(title="Event Information Link", url="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_KZ7U4STiA18gvAFs0jCwpIKobcUGGcteoLo4hDcE3Pkn9W2bqix6m2IeQ818EY_qgGlqk4Bisnly/pubhtml", description="List to event spreadsheet")
+  embed.set_author(name="DEDM Bot",, icon_url="https://i.imgur.com/XCL9PUZ.jpg")
+  embed.add_field(name="Link:", value="https://docs.google.com/spreadsheets/d/e/2PACX-1vT_KZ7U4STiA18gvAFs0jCwpIKobcUGGcteoLo4hDcE3Pkn9W2bqix6m2IeQ818EY_qgGlqk4Bisnly/pubhtml", inline=False)
+  await ctx.send(embed=embed)
+
 
 @bot.command(name='roe', aliases=['ROE']) #sends user a DM with current roe
 async def _bot(ctx):
