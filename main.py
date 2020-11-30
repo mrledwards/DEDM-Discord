@@ -3,11 +3,29 @@ from discord.ext import commands
 import os
 from keep_alive import keep_alive
 from replit import db
+from pathlib import Path
+import sqlite3
+from sqlite3 import Error
+import os
+from db import *
+
 
 intents = discord.Intents.default()
 intents.members = True
 
+secret_key = ""
+
 bot = commands.Bot(command_prefix='!', description="DEDM Discord bot", intents=intents)
+
+DBPATH = "bot.db"
+if os.path.isfile(str(DBPATH)):
+  print("db exists")
+else:
+	blank_db = sqlite3.connect(str(DBPATH))
+	init_db()
+	print("db created")
+  
+
 
 @bot.event
 async def on_ready():
@@ -30,6 +48,8 @@ async def _bot(ctx):
   embed.set_footer(text="if you have any questions, or need help, please feel free to contact Wakdem")
   await ctx.message.delete()
   await ctx.author.send(embed=embed)
+
+
 
 @bot.command(name="event")
 async def _bot(ctx):
@@ -80,29 +100,40 @@ async def _bot(ctx):
 @bot.command(name="epic")
 async def _bot(ctx, arg1, arg2):
 	await ctx.message.delete()
-	memberName = ctx.author.display_name
+	memberName = str(ctx.author.display_name)
 	if arg1 == "have":
-		keys = db.keys()
-		if memberName in keys and arg2 != "":
-			db[memberName] = arg2
-			await ctx.autor.send("updated list")
-		elif arg2 != "":
-			db[memberName] = arg2
-			await ctx.author.send("your information has been added")
-		else:
-			member.send("something went wrong, please try again")
+	
+		m = ctx.message.content
+		x = m.rsplit(" ")
+		bp = x[-1]
+		print(memberName, arg2, bp)
+		conn = db_connect()
+		c = conn.cursor()
+		sql = f"""INSERT OR REPLACE INTO epic_bp_needed (discord_name, ship_name, bp_have) VALUES ('{memberName}', '{arg2}', {bp});"""
+		#print(sql)
+		conn.execute(sql)
+		conn.commit()
+		conn.close()
+		await ctx.author.send("updated list")
 	elif arg1 == "obtained":
 
 		await ctx.author.send("Congratulations!!!!! May you fight with honour. \n Your information is now removed from the list \n https://i.imgur.com/C3Oiobz.gif")
-		del db[memberName]
+		conn = db_connect()
+		c= conn.cursor()
+		sql = f"""DELETE FROM epic_bp_needed WHERE discord_name = '{memberName}' AND ship_name = '{arg2}';"""
+		conn.execute(sql)
+		conn.commit()
+		conn.close()
 	elif arg1 == "list":
-		keys = db.keys()
-		m = "**List of Epic BP** \n"
-		for k in keys:
-			bp = db[k]
-			m += str(k) + " has " + str(bp) + " \n "
-
-		await ctx.author.send(m)
+		conn = db_connect()
+		c = conn.cursor()
+		sql = """SELECT discord_name, ship_name, bp_have FROM epic_bp_needed;"""
+		c.execute(sql)
+		conn.commit()
+		fetched = c.fetchall()
+		conn.close
+		results = "\n".join(map(str, fetched)) 
+		await ctx.author.send("Member | Ship | BP \n" + results)
 	else:
 		await ctx.author.send("Something went wrong, please try again") 
 
@@ -111,7 +142,7 @@ async def _bot(ctx, arg1, arg2):
 #@commands.has_role("Leadership")
 async def _bot(ctx, arg1):
   await ctx.message.delete()
-  role = discord.utils.get(ctx.guild.roles, id=539467965276356620) #change id to the target id for the server (539467965276356620) (772697868225740820) is testing only
+  role = discord.utils.get(ctx.guild.roles, id=772697868225740820) #change id to the target id for the server (539467965276356620) (772697868225740820) is testing only
 
   if role in ctx.author.roles:
   #if member.has_role("Leadership"):
@@ -141,7 +172,7 @@ async def _bot(ctx, arg1):
 
 
 keep_alive()
-
+init_db()
 token = os.environ.get("TOKEN")
 bot.run(token)
 

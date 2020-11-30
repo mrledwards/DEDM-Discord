@@ -56,6 +56,14 @@ version = "7.1.2"
 
 [[package]]
 category = "main"
+description = "A data integrity check library"
+name = "compiler"
+optional = false
+python-versions = "*"
+version = "0.2.0"
+
+[[package]]
+category = "main"
 description = "A Python wrapper for the Discord API"
 name = "discord.py"
 optional = false
@@ -181,7 +189,7 @@ idna = ">=2.0"
 multidict = ">=4.0"
 
 [metadata]
-content-hash = "ae74d3a215b6b0656dc4473c221422037327b468d76c60a0f0487f74ce125941"
+content-hash = "58a9bbc14bef318b0d88cb0f20fd60b529b78a45eabb3edcff19e22b4c421ffa"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -215,6 +223,10 @@ chardet = [
 click = [
     {file = "click-7.1.2-py2.py3-none-any.whl", hash = "sha256:dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"},
     {file = "click-7.1.2.tar.gz", hash = "sha256:d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a"},
+]
+compiler = [
+    {file = "compiler-0.2.0-py3-none-any.whl", hash = "sha256:995dcdc44805c793ac7fb2f8702683b3d66ae27f2c1862c176a17a9ec9723673"},
+    {file = "compiler-0.2.0.tar.gz", hash = "sha256:4c337bd9926ffef192c0057b853a239cc0acfcb4d3ca32f739c66b5f393f78ba"},
 ]
 "discord.py" = [
     {file = "discord.py-1.5.1-py3-none-any.whl", hash = "sha256:2367359e31f6527f8a936751fc20b09d7495dd6a76b28c8fb13d4ca6c55b7563"},
